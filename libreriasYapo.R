@@ -43,3 +43,15 @@ obtenerAnioUsuarioYapo <- function(htmlSeg){
   seniority <- gsub("En Yapo desde ","",seniority)
   return(strsplit(seniority," ")[[1]][2])
 }
+
+obtenerPublicacionesActivasUsuarioYapo <- function(htmlSeg){
+  nodoBread <- html_nodes(htmlSeg, "seller-info")
+  actives <- html_attr(nodoBread,"actives")
+  return(gsub("[.]","",actives))
+}
+
+obtenerPublicacionesTotalesUsuarioYapo <- function(htmlSeg){
+  nodoBread <- html_nodes(htmlSeg, "seller-info")
+  historical <- html_attr(nodoBread,"historical")
+  return(gsub("[.]","",historical))
+}

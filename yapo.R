@@ -26,8 +26,12 @@
       comuna <- obtenerComuna(htmlSeg)
       tipoNegocio <- obtenerTipoNegocio(htmlSeg)
       anioUsuarioyapo <- obtenerAnioUsuarioYapo(htmlSeg)
+      publicacionesactivasusuarioyapo <- obtenerPublicacionesActivasUsuarioYapo(htmlSeg)
+      publicacionestotalesusuarioyapo <- obtenerPublicacionesTotalesUsuarioYapo(htmlSeg)
       
-      fullDatos <- rbind(fullDatos,data.frame(comuna = comuna, categoria = textoTipoAviso, precio = precio, tiponegocio = tipoNegocio, aniousuarioyapo = anioUsuarioyapo, urlyapo = urlYapo))
+      fullDatos <- rbind(fullDatos,data.frame(comuna = comuna, categoria = textoTipoAviso, precio = precio,
+                                              tiponegocio = tipoNegocio, aniousuarioyapo = anioUsuarioyapo,
+                                              urlyapo = urlYapo ))
     }
   }
   
