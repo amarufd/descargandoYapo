@@ -9,7 +9,7 @@
   source('libreriasYapo.R')
 
   fullDatos <- data.frame()
-  for(numeroPagina in 1:5){
+  for(numeroPagina in 1:3){
     readHtml <- read_html(paste("https://www.yapo.cl/region_metropolitana?ca=15_s&o=",numeroPagina,sep = ""))
     print(paste("Descargando pagina nro:",numeroPagina))
     nodeTabla <- html_nodes(readHtml, ".listing_thumbs")
@@ -21,17 +21,20 @@
       
       print(paste("Descargando URL ==> ",urlYapo))
       
-      textoTipoAviso <- obtener(htmlSeg)
+      textoTipoAviso <- obtenerCategoria(htmlSeg)
       precio <- sacandoPrecio(htmlSeg)
-      fullDatos <- rbind(fullDatos,data.frame(categoria = textoTipoAviso, precio = precio))
+      comuna <- obtenerComuna(htmlSeg)
+      tipoNegocio <- obtenerTipoNegocio(htmlSeg)
+      anioUsuarioyapo <- obtenerAnioUsuarioYapo(htmlSeg)
+      
+      fullDatos <- rbind(fullDatos,data.frame(comuna = comuna, categoria = textoTipoAviso, precio = precio, tiponegocio = tipoNegocio, aniousuarioyapo = anioUsuarioyapo, urlyapo = urlYapo))
     }
   }
   
-  ggplot(fullDatos,aes(x = categoria))+
-    geom_bar()+
-    coord_flip()
-  
   View(fullDatos)
+
+  
+  
 
   
   
